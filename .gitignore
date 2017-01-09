@@ -1,0 +1,14 @@
+**/node_modules/**
+**/dist/**
+**/target/**
+**/.mvn/**
+**/static/**
+.classpath
+.settings
+.project
+**/.idea/**
+**.iml**
+npm-debug.log
+**/uploads/**
+config/
+microservices-config/
