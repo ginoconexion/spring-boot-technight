@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class Computer {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     @Column(nullable = false)
