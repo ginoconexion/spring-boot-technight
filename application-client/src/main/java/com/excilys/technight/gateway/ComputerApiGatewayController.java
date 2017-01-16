@@ -1,6 +1,8 @@
 package com.excilys.technight.gateway;
 
 import com.excilys.technight.dto.ComputerDto;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.ribbon.proxy.annotation.Hystrix;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Resources;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +31,11 @@ public class ComputerApiGatewayController {
         this.restTemplate = restTemplate;
     }
 
+    public Collection<String> getNamesError() {
+        return new ArrayList<>();
+    }
+
+    @HystrixCommand(fallbackMethod = "getNamesError")
     @RequestMapping(method = RequestMethod.GET, value = "/names")
     public Collection<String> getNames() {
         return this.restTemplate.exchange("http://computer-service/computers", HttpMethod.GET, null, new ParameterizedTypeReference<List<ComputerDto>>() {
