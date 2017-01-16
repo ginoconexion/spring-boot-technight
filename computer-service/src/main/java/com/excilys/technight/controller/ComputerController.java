@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,9 +33,10 @@ public class ComputerController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<ComputerDto> getAll() {
+    public Collection<ComputerDto> getAll() {
         return computerRepository.findAll().stream().map(ComputerMapper::toDto).collect(Collectors.toList());
     }
+
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ComputerDto getById(@PathVariable Long id) {
