@@ -4,9 +4,13 @@ import com.excilys.technight.dto.ComputerDto;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.ribbon.proxy.annotation.Hystrix;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpMethod;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,8 +31,20 @@ public class ComputerApiGatewayController {
     private final RestTemplate restTemplate;
 
     @Autowired
+    private Source ouputChannelSource;
+
+
+    @Autowired
     public ComputerApiGatewayController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public void save(@RequestBody ComputerDto dto) {
+        MessageChannel channel = this.ouputChannelSource.output();
+        channel.send(
+                MessageBuilder.withPayload(dto).build()
+        );
     }
 
     public Collection<String> getNamesError() {
