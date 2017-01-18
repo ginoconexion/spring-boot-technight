@@ -18,10 +18,10 @@ public class Computer {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate introduced;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate discontinued;
 
     @Column(nullable = false)
