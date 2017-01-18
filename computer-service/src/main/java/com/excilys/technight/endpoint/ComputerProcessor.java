@@ -20,7 +20,7 @@ public class ComputerProcessor {
         this.computerRepository = computerRepository;
     }
 
-    @ServiceActivator(inputChannel = "input")
+    @ServiceActivator(inputChannel = "computerInput")
     public void acceptComputer(ComputerDto dto) {
         this.computerRepository.save(ComputerMapper.fromDto(dto));
     }

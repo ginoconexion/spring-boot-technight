@@ -1,5 +1,6 @@
 package com.excilys.technight;
 
+import com.excilys.technight.endpoint.ComputerSink;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +10,7 @@ import org.springframework.cloud.stream.messaging.Sink;
 
 @EnableDiscoveryClient
 @EnableAutoConfiguration
-@EnableBinding(Sink.class)
+@EnableBinding(ComputerSink.class)
 @SpringBootApplication
 public class ComputerServiceApplication {
 
