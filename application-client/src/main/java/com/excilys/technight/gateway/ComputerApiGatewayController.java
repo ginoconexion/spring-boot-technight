@@ -1,6 +1,7 @@
 package com.excilys.technight.gateway;
 
 import com.excilys.technight.dto.ComputerDto;
+import com.excilys.technight.source.ComputerSource;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.ribbon.proxy.annotation.Hystrix;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class ComputerApiGatewayController {
     private final RestTemplate restTemplate;
 
     @Autowired
-    private Source ouputChannelSource;
+    private ComputerSource ouputChannelSource;
 
 
     @Autowired
@@ -41,7 +42,7 @@ public class ComputerApiGatewayController {
 
     @RequestMapping(method = RequestMethod.POST)
     public void save(@RequestBody ComputerDto dto) {
-        MessageChannel channel = this.ouputChannelSource.output();
+        MessageChannel channel = this.ouputChannelSource.computerOutput();
         channel.send(
                 MessageBuilder.withPayload(dto).build()
         );
