@@ -4,15 +4,23 @@
 
 ### Install RabbitMQ Server :
 
-follow theses instructions to install RabbitMQ Server (for Debian) :
+follow theses instructions to install RabbitMQ Server 
+ - for Debian :
+```bash
+echo 'deb http://www.rabbitmq.com/debian/ testing main' | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+         
+wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install rabbitmq-server
+```
+ - for OSX
+ ```bash
+ brew update
+ brew install rabbitmq
+ ```
+To run rabbitMQ server use : `rabbitmq-server`. You may add `/usr/local/sbin` to your path variable.
+For more information go to RabitMQ official site : https://www.rabbitmq.com/
 
-**echo 'deb http://www.rabbitmq.com/debian/ testing main' |
-        sudo tee /etc/apt/sources.list.d/rabbitmq.list**
-        
-**wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc |
-        sudo apt-key add -**
-**sudo apt-get update**
-**sudo apt-get install rabbitmq-server**
 
 Clone following git repository : **https://github.com/ginoconexion/microservices-config.git** containing micro-services configuration
 
